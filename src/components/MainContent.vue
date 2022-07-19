@@ -1,14 +1,21 @@
 <template>
   <main>
     <div class="container p-5">
-        <div class="row col-10 m-auto text-center text-white">
-            <SongCard v-for="(song, index) in songs" :key="index"
+        <div class="row col-10 m-auto text-center text-white " 
+        v-if="songs.length === 10" >
+
+            <SongCard
+            v-for="(song, index) in songs" :key="index"
             :title="song.title"
             :author="song.author"
             :year="song.year"
             :genre="song.genre"
             :posterImg="song.poster"
             />
+        </div>
+
+        <div v-else class="fs-1 text-light text-center">
+            ciao
         </div>
     </div>
   </main>
@@ -33,7 +40,6 @@ export default {
         getAlbums: function(){
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then((response)=>{
-                // console.log(response.data.response);
                 this.songs = response.data.response ;
                 console.log(this.songs)
             })
@@ -45,6 +51,7 @@ export default {
 
     },
     created(){
+        
         this.getAlbums();
     }
 }
@@ -55,6 +62,7 @@ export default {
 
     main{
         background-color: $mainBgColor;
+        height: calc(100vh + 5rem);
     }
 
 </style>
