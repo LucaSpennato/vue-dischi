@@ -31,6 +31,7 @@ export default {
 
     div.ms_card{
         background-color: $cardbgColor;
+        height: 20rem;
     }
 
 </style>
