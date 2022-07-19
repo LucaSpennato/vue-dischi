@@ -17,17 +17,11 @@
 
             <div v-else class="col-2 m-auto fs-1 text-light">
                 <div class="page-loader">
-                    Ciao mi sto caricando
+                    <i class="bi bi-hourglass"></i>
                 </div>
             </div>
 
         </div>
-
-        <!-- <div class=" fs-1 text-dark py-5 my-5">
-            <div class="page-loader">
-                ciao
-            </div>
-        </div> -->
     </div>
   </main>
 </template>
@@ -70,6 +64,7 @@ export default {
 
 <style lang="scss">
     @import '../style/variables.scss';
+    @import '~bootstrap-icons/font/bootstrap-icons.css';
 
     main{
         background-color: $mainBgColor;
