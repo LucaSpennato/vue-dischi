@@ -1,10 +1,8 @@
 <template>
-  <main>
-    <div class="container">
-        <div class="row">
-            <div class="col-10 m-auto text-center">
-                <SongCard />
-            </div>
+  <main class="bg-dark">
+    <div class="container p-5">
+        <div class="row col-10 m-auto text-center">
+            <SongCard />
         </div>
     </div>
   </main>
@@ -21,6 +19,6 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
 
 </style>
