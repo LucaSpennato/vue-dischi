@@ -15,6 +15,8 @@
                     </select>
                 </div> -->
 
+                <div> {{ selectedOption }}</div>
+
                 <SongCard
                 v-for="(song, index) in filteredSongs" :key="index"
                 :title="song.title"
@@ -45,12 +47,14 @@ export default {
     components:{
         SongCard,
     },
+    props: {
+        selectedOption: String,
+    },
     data: function(){
         return{
             songs: [],
             isPageLoaded: false,
             filteredSongs: [],
-            // selectedValue: '',
         }
     },
     methods: {
@@ -72,7 +76,7 @@ export default {
                 // nulla senza richiamarla qua. Quel che succede è che qua fa la chiamata E POI...succede il resto!
                 // di fatti mettendo il console in funzione vedremo due log, uno vuoto all'avvio della pagina,
                 // ed uno popolato quando la chiamata get sarà completa!
-                this.filteredSearch('');
+                this.filteredSearch(this.selectedOption)
             })
             .catch((error)=>{
                 console.log(error);

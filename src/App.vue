@@ -1,7 +1,9 @@
 <template>
   <div id="app">
-      <HeaderComponent @choosedGenre="selectedOption"/>
-      <MainContent/>
+      <HeaderComponent @choosedGenre="selection"/>
+      <MainContent
+      :selectedOption="selectedOption"
+      />
   </div>
 </template>
 
@@ -15,10 +17,15 @@ export default {
     HeaderComponent,
     MainContent,
   },
+  data: function(){
+    return{
+    selectedOption: '',
+    }
+  },
   methods: {
-
-    selectedOption: function(needle){
-      console.warn(needle)
+    selection: function(needle){
+      this.selectedOption = needle;
+      console.warn(this.selectedOption);
     }
 
   }
