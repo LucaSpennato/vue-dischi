@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-      <HeaderComponent/>
+      <HeaderComponent @choosedGenre="selectedOption"/>
       <MainContent/>
   </div>
 </template>
@@ -14,6 +14,13 @@ export default {
   components: {
     HeaderComponent,
     MainContent,
+  },
+  methods: {
+
+    selectedOption: function(needle){
+      console.warn(needle)
+    }
+
   }
 }
 </script>

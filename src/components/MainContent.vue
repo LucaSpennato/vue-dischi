@@ -5,7 +5,7 @@
             <div class="row col-10 m-auto text-white" 
             v-if="isPageLoaded">
 
-                <div class="col-12">
+                <!-- <div class="col-12">
                     <select class="form-select" v-model="selectedValue" @click="filteredSearch(selectedValue)">
                         <option value="">Nessuna selezione</option>
                         <option>Jazz</option>
@@ -13,8 +13,7 @@
                         <option>Pop</option>
                         <option>Metal</option>
                     </select>
-                    <div>{{selectedValue}}</div>
-                </div>
+                </div> -->
 
                 <SongCard
                 v-for="(song, index) in filteredSongs" :key="index"
@@ -51,7 +50,7 @@ export default {
             songs: [],
             isPageLoaded: false,
             filteredSongs: [],
-            selectedValue: '',
+            // selectedValue: '',
         }
     },
     methods: {
@@ -73,7 +72,7 @@ export default {
                 // nulla senza richiamarla qua. Quel che succede è che qua fa la chiamata E POI...succede il resto!
                 // di fatti mettendo il console in funzione vedremo due log, uno vuoto all'avvio della pagina,
                 // ed uno popolato quando la chiamata get sarà completa!
-                this.filteredSearch(this.selectedValue);
+                this.filteredSearch('');
             })
             .catch((error)=>{
                 console.log(error);
