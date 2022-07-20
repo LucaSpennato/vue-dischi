@@ -39,29 +39,41 @@ export default {
         return{
             songs: [],
             isPageLoaded: false,
+            filteredSongs: [],
         }
     },
     methods: {
+
+        filteredSearch: function(needle){
+            // this.filteredSongs = [...this.songs];
+            const result = this.songs.filter((element) => element.genre.toLowerCase().includes(needle));
+            console.log(result);
+            return result;
+        },
 
         getAlbums: function(){
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then((response)=>{
                 this.songs = response.data.response ;
-                console.log(this.songs);
-                
+
                 setTimeout(() => {
                     this.isPageLoaded = true;
                 }, 2000);
+                
+                // perchè richiamarla qua? Perchè il tutto avviene in modo asincrono, quindi non troveremmo
+                // nulla senza richiamarla qua. Quel che succede è che qua fa la chiamata E POI...succede il resto!
+                // di fatti mettendo il console in funzione vedremo due log, uno vuoto all'avvio della pagina,
+                // ed uno popolato quando la chiamata get sarà completa!
+                this.filteredSearch('jazz');
+                
             })
             .catch((error)=>{
                 console.log(error);
             })
-            
         }
 
     },
     created(){
-        
         this.getAlbums();
     }
 }
