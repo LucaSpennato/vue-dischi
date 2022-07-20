@@ -3,7 +3,7 @@
     <div class="container p-5 text-center">
         <div class="row">
             <div class="row col-10 m-auto text-white" 
-            v-if="songs.length === 10" >
+            v-if="isPageLoaded" >
 
                 <SongCard
                 v-for="(song, index) in songs" :key="index"
@@ -38,6 +38,7 @@ export default {
     data: function(){
         return{
             songs: [],
+            isPageLoaded: false,
         }
     },
     methods: {
@@ -46,7 +47,11 @@ export default {
             axios.get('https://flynn.boolean.careers/exercises/api/array/music')
             .then((response)=>{
                 this.songs = response.data.response ;
-                console.log(this.songs)
+                console.log(this.songs);
+                
+                setTimeout(() => {
+                    this.isPageLoaded = true;
+                }, 2000);
             })
             .catch((error)=>{
                 console.log(error);
