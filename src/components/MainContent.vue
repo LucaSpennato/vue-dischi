@@ -2,19 +2,14 @@
   <main>
     <div class="container p-5 text-center">
         <div class="row">
-            <searchComponent  @choosedGenre="filteredSearch"/>
+            
             <div class="row col-10 m-auto text-white" 
             v-if="isPageLoaded">
+            <div class="row mb-4">
+                <searchForGenre  @choosedGenre="filteredSearch"/>
+                <searchForAuthor @choosedGenre="filteredSearchAuthor"/>    
+            </div>
 
-                <!-- <div class="col-12">
-                    <select class="form-select" v-model="selectedValue" @click="filteredSearch(selectedValue)">
-                        <option value="">Nessuna selezione</option>
-                        <option>Jazz</option>
-                        <option>Rock</option>
-                        <option>Pop</option>
-                        <option>Metal</option>
-                    </select>
-                </div> -->
 
                 <SongCard
                 v-for="(song, index) in filteredSongs" :key="index"
@@ -39,18 +34,17 @@
 
 <script>
 import SongCard from './SongCard.vue';
-import searchComponent from './searchComponent.vue';
+import searchForGenre from './searchForGenre.vue';
+import searchForAuthor from './searchForAuthor.vue';
 import axios from 'axios';
 
 export default {
     name: 'MainComponent',
     components:{
         SongCard,
-        searchComponent,
+        searchForGenre,
+        searchForAuthor,
     },
-    // props: {
-    //     selectedOption: String,
-    // },
     data: function(){
         return{
             songs: [],
@@ -60,8 +54,14 @@ export default {
     },
     methods: {
 
+        filteredSearchAuthor: function(needle){
+          this.filteredSongs = [...this.songs].filter((element) => element.author.toLowerCase().includes(needle.toLowerCase()));
+        
+        },
+
         filteredSearch: function(needle){
           this.filteredSongs = [...this.songs].filter((element) => element.genre.toLowerCase().includes(needle.toLowerCase()));
+        
         },
 
         getAlbums: function(){
