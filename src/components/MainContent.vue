@@ -2,6 +2,7 @@
   <main>
     <div class="container p-5 text-center">
         <div class="row">
+            <searchComponent  @choosedGenre="filteredSearch"/>
             <div class="row col-10 m-auto text-white" 
             v-if="isPageLoaded">
 
@@ -14,8 +15,6 @@
                         <option>Metal</option>
                     </select>
                 </div> -->
-
-                <div> {{ selectedOption }}</div>
 
                 <SongCard
                 v-for="(song, index) in filteredSongs" :key="index"
@@ -40,16 +39,18 @@
 
 <script>
 import SongCard from './SongCard.vue';
+import searchComponent from './searchComponent.vue';
 import axios from 'axios';
 
 export default {
     name: 'MainComponent',
     components:{
         SongCard,
+        searchComponent,
     },
-    props: {
-        selectedOption: String,
-    },
+    // props: {
+    //     selectedOption: String,
+    // },
     data: function(){
         return{
             songs: [],
@@ -60,7 +61,7 @@ export default {
     methods: {
 
         filteredSearch: function(needle){
-          return this.filteredSongs = [...this.songs].filter((element) => element.genre.toLowerCase().includes(needle.toLowerCase()));
+          this.filteredSongs = [...this.songs].filter((element) => element.genre.toLowerCase().includes(needle.toLowerCase()));
         },
 
         getAlbums: function(){
@@ -76,7 +77,7 @@ export default {
                 // nulla senza richiamarla qua. Quel che succede è che qua fa la chiamata E POI...succede il resto!
                 // di fatti mettendo il console in funzione vedremo due log, uno vuoto all'avvio della pagina,
                 // ed uno popolato quando la chiamata get sarà completa!
-                this.filteredSearch(this.selectedOption)
+                this.filteredSearch('')
             })
             .catch((error)=>{
                 console.log(error);
@@ -86,7 +87,7 @@ export default {
     },
     created(){
         this.getAlbums();
-    }
+    },
 }
 </script>
 
