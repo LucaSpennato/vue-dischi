@@ -6,7 +6,14 @@
             v-if="isPageLoaded">
 
                 <div class="col-12">
-                    <input type="text" v-model="searchInput" @keyup="filteredSearch(searchInput)">
+                    <select class="form-select" v-model="selectedValue" @click="filteredSearch(selectedValue)">
+                        <option value="">Nessuna selezione</option>
+                        <option>Jazz</option>
+                        <option>Rock</option>
+                        <option>Pop</option>
+                        <option>Metal</option>
+                    </select>
+                    <div>{{selectedValue}}</div>
                 </div>
 
                 <SongCard
@@ -44,13 +51,13 @@ export default {
             songs: [],
             isPageLoaded: false,
             filteredSongs: [],
-            searchInput: '',
+            selectedValue: '',
         }
     },
     methods: {
 
         filteredSearch: function(needle){
-          return this.filteredSongs = [...this.songs].filter((element) => element.genre.toLowerCase().includes(needle));
+          return this.filteredSongs = [...this.songs].filter((element) => element.genre.toLowerCase().includes(needle.toLowerCase()));
         },
 
         getAlbums: function(){
@@ -66,8 +73,7 @@ export default {
                 // nulla senza richiamarla qua. Quel che succede è che qua fa la chiamata E POI...succede il resto!
                 // di fatti mettendo il console in funzione vedremo due log, uno vuoto all'avvio della pagina,
                 // ed uno popolato quando la chiamata get sarà completa!
-                this.filteredSearch(this.searchInput);
-                
+                this.filteredSearch(this.selectedValue);
             })
             .catch((error)=>{
                 console.log(error);
